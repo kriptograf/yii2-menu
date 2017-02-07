@@ -1,6 +1,6 @@
 <?php
 
-namespace kriptograf\menu;
+namespace kriptograf\menu\widgets;
 
 /**
  * This is just an example.
