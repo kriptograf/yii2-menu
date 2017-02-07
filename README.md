@@ -50,4 +50,6 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \kriptograf\menu\widgets\AutoloadExample::widget(); ?>```
+<?= \kriptograf\menu\widgets\AutoloadExample::widget(); ?>
+
+```
