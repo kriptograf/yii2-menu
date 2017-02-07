@@ -11,7 +11,7 @@
             "email": "foreach@mail.ru"
         }
     ],
-    "minimum-stability": "beta",
+    "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "~2.0.0"
     },
