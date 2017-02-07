@@ -1,0 +1,21 @@
+{
+    "name": "kriptograf/yii2-menu",
+    "description": "Menu module for you site",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","menu"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kriptograf",
+            "email": "foreach@mail.ru"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "kriptograf\\menu\\": ""
+        }
+    }
+}
