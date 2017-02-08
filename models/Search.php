@@ -36,10 +36,10 @@ class Search extends Menu {
         }
 
         $query->andFilterWhere([
-            'id' => $this->menuId,
+            'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->menu]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
