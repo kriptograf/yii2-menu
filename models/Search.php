@@ -7,7 +7,7 @@ use kriptograf\menu\models\Menu;
 /**
  * Search represents the model behind the search form about `common\models\Model`.
  */
-class Search extends Model {
+class Search extends Menu {
     /**
      * @inheritdoc
      */
