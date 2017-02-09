@@ -1,8 +1,4 @@
 <?php
-
-use yii\widgets\ActiveForm;
-use yii\helpers\Html;
-
 kriptograf\menu\MenuAsset::register($this);
 $this->title = Yii::t('app', 'Create');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Menu'), 'url' => ['index']];
