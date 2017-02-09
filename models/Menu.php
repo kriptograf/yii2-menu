@@ -10,6 +10,7 @@ use kriptograf\menu\models\MenuItem;
  * @property integer $id
  * @property string $name
  * @property string $code
+ * @property string $type
  * @property string $description
  * @property integer $status
  *
@@ -33,8 +34,6 @@ class Menu extends \yii\db\ActiveRecord
 		return [
 			[['status'], 'integer'],
             [['name','code','description','type'], 'string'],
-			[['name', 'code', 'type'], 'max'=>255],
-            ['status', 'default', 'value' => 1, 'on' => 'insert'],
 		];
 	}
 

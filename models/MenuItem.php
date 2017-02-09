@@ -4,6 +4,7 @@ namespace kriptograf\menu\models;
 
 use Yii;
 use kriptograf\menu\models\Menu;
+use yii2tech\ar\position\PositionBehavior;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -30,6 +31,15 @@ class MenuItem extends \yii\db\ActiveRecord
 		return 'menu_item';
 	}
 
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => PositionBehavior::className(),
+				'positionAttribute' => 'sort',
+			],
+		];
+	}
 
 	public function rules()
 	{
@@ -37,9 +47,8 @@ class MenuItem extends \yii\db\ActiveRecord
 			[['menu_id', 'title', 'url'], 'required'],
 			[['status', 'parent_id', 'menu_id'], 'integer'],
             [['title','url','class', 'attr_title', 'target', 'rel'], 'string'],
-			[['title', 'url', 'class', 'attr_title', 'target', 'rel'], 'max'=>255],
+			[['parent_id'], 'default', 'value'=>0],
 			['sort', 'safe'],
-            ['status', 'default', 'value' => 1, 'on' => 'insert'],
 		];
 	}
 
@@ -65,6 +74,15 @@ class MenuItem extends \yii\db\ActiveRecord
 	}
 
 	/**
+	 * Relations childs items
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getChilds()
+	{
+		return $this->hasMany(MenuItem::className(), ['parent_id'=>'id']);
+	}
+
+	/**
 	 * Return list options to dropdown list
 	 * @return array
 	 */
@@ -81,5 +99,32 @@ class MenuItem extends \yii\db\ActiveRecord
 	public function getMenu()
 	{
 		return $this->hasOne(Menu::className(), ['id' => 'menu_id']);
+	}
+
+	/**
+	 * Return array items to Menu widget
+	 * @param $menu_id
+	 * @return array
+	 */
+	public static function getItems($menu_id)
+	{
+		$out = [];
+		$items = self::find()->where(['menu_id'=>$menu_id, 'status'=>1])->orderBy('sort')->all();
+		foreach ($items as $key => $item)
+		{
+			$out[$key]['label'] = $item->title;
+			$out[$key]['url'] = $item->url;
+			if($item->childs)
+			{
+				foreach ($item->childs as $k => $child) {
+					$out[$key]['items'][$k] = [
+						'label'=>$child->title,
+						'url'=>$child->url,
+					];
+				}
+			}
+		}
+
+		return $out;
 	}
 }

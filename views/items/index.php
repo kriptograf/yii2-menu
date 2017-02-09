@@ -9,7 +9,7 @@ use yii\grid\GridView;
 ?>
 
 <p>
-    <a href="<?php echo \yii\helpers\Url::toRoute(['/menu/items/create', 'id'=>$id]);?>"><?php echo Yii::t('app','Create');?></a>
+    <a class="btn btn-success" href="<?php echo \yii\helpers\Url::toRoute(['/menu/items/create', 'id'=>$id]);?>"><?php echo Yii::t('app','Create');?></a>
 </p>
 <?php echo GridView::widget([
     'dataProvider' => $dataProvider,

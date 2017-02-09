@@ -1,6 +1,5 @@
 <?php
-#Copyright (c) 2017 Rafal Marguzewicz pceuropa.net LTD
-use pceuropa\menu\Menu;
+
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -17,7 +16,10 @@ echo  GridView::widget([
 		'name',
 		'code',
 		'description',
-		['class' => 'yii\grid\ActionColumn',],
+		'type',
+		[
+			'class' => 'yii\grid\ActionColumn',
+		],
 	],
 ]); 
 

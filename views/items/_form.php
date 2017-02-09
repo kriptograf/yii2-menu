@@ -9,10 +9,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
 
-<div class="event-form">
+<div class="menu-item-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    
     <?= $form->field($model, 'parent_id')->dropDownList($model->getParentItems(), [
         'prompt'=>'Select parent item'
     ]) ?>

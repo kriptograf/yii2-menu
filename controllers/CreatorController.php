@@ -3,7 +3,6 @@ namespace kriptograf\menu\controllers;
 
 use Yii;
 use yii\web\Response;
-use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 use kriptograf\menu\models\Menu;
@@ -37,7 +36,6 @@ class CreatorController extends \yii\web\Controller
 
         if ($model->load(Yii::$app->request->post()))
         {
-            $model->scenario = 'insert';
             if($model->save())
 			{
 				return $this->redirect(['index']);
@@ -67,22 +65,17 @@ class CreatorController extends \yii\web\Controller
 	public function actionUpdate($id)
 	{
 		$model = $this->findModel($id);
-		$request = Yii::$app->request;
-	
-		 if ($request->isAjax) 
-		 {
-			\Yii::$app->response->format = Response::FORMAT_JSON;
 
-			switch (true) {
-				case $request->isGet : return ['success' => true, 'menu' => $model->menu];
-				case $request->post('update'):
-					$model->menu = $request->post('menu');
-					return $model->save() ? ['success' => true] : ['success' => false];
-				default: return ['success' => false];
+		if ($model->load(Yii::$app->request->post()))
+		{
+			if($model->save())
+			{
+				return $this->redirect(['index']);
 			}
+
 		}
 	
-		return $this->render('update');
+		return $this->render('update', ['model'=>$model]);
 	}
 
 	/**

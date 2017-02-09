@@ -37,7 +37,6 @@ class ItemsController extends \yii\web\Controller
 
         if ($model->load(Yii::$app->request->post()))
         {
-            $model->scenario = 'insert';
 			$model->menu_id = $id;
 
             if($model->save())
@@ -81,22 +80,18 @@ class ItemsController extends \yii\web\Controller
 	public function actionUpdate($id)
 	{
 		$model = $this->findModel($id);
-		$request = Yii::$app->request;
-	
-		 if ($request->isAjax) 
-		 {
-			\Yii::$app->response->format = Response::FORMAT_JSON;
+		
+		if ($model->load(Yii::$app->request->post()))
+		{
+			$model->menu_id = $id;
 
-			switch (true) {
-				case $request->isGet : return ['success' => true, 'menu' => $model->menu];
-				case $request->post('update'):
-					$model->menu = $request->post('menu');
-					return $model->save() ? ['success' => true] : ['success' => false];
-				default: return ['success' => false];
+			if($model->save())
+			{
+				return $this->redirect(['index', 'id' => $model->menu_id]);
 			}
 		}
 	
-		return $this->render('update');
+		return $this->render('update', ['model'=>$model, 'id'=>$model->menu_id]);
 	}
 
 	/**
