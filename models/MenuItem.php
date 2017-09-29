@@ -81,6 +81,11 @@ class MenuItem extends \yii\db\ActiveRecord
 	{
 		return $this->hasMany(MenuItem::className(), ['parent_id'=>'id']);
 	}
+	
+	public function getParent()
+	{
+		return $this->hasOne(MenuItem::className(), ['id'=>'parent_id']);
+	}
 
 	/**
 	 * Return list options to dropdown list
