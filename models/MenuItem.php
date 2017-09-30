@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * @todo Добавить выпадающие списки значений для атрибутов ссылки
+ * @todo Сделать возможность добавления дата атрибутов
+ * @todo Добавить атрибут encode, dropDownOptions
+ */
 namespace kriptograf\menu\models;
 
 use Yii;
@@ -26,6 +30,9 @@ use yii\helpers\ArrayHelper;
  */
 class MenuItem extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
 	public static function tableName() 
 	{ 
 		return 'menu_item';
@@ -81,19 +88,24 @@ class MenuItem extends \yii\db\ActiveRecord
 	{
 		return $this->hasMany(MenuItem::className(), ['parent_id'=>'id']);
 	}
-	
+
+    /**
+     * Relation belongs_to parent item
+     * @return mixed
+     */
 	public function getParent()
 	{
 		return $this->hasOne(MenuItem::className(), ['id'=>'parent_id']);
 	}
 
-	/**
-	 * Return list options to dropdown list
-	 * @return array
-	 */
-	public function getParentItems()
+    /**
+     * Return list options to dropdown list
+     * @param $menu_id integer
+     * @return mixed
+     */
+	public function getParentItems($menu_id)
 	{
-		$parents = self::find()->where(['parent_id'=>0])->all();
+		$parents = self::find()->where(['parent_id'=>0, 'menu_id'=>$menu_id, 'status'=>self::STATUS_ACTIVE])->all();
 		return ArrayHelper::map($parents, 'id', 'title');
 	}
 
@@ -114,17 +126,29 @@ class MenuItem extends \yii\db\ActiveRecord
 	public static function getItems($menu_id)
 	{
 		$out = [];
-		$items = self::find()->where(['menu_id'=>$menu_id, 'status'=>1])->orderBy('sort')->all();
+		$items = self::find()->where(['menu_id'=>$menu_id, 'status'=>self::STATUS_ACTIVE])->orderBy('sort')->all();
 		foreach ($items as $key => $item)
 		{
 			$out[$key]['label'] = $item->title;
 			$out[$key]['url'] = $item->url;
+			$out[$key]['linkOptions'] = [
+			    'class'=>$item->class,
+                'title'=>$item->attr_title,
+                'target'=>$item->target,
+                'rel'=>$item->rel,
+            ];
 			if($item->childs)
 			{
 				foreach ($item->childs as $k => $child) {
 					$out[$key]['items'][$k] = [
 						'label'=>$child->title,
 						'url'=>$child->url,
+                        'linkOptions' => [
+                            'class'=>$child->class,
+                            'title'=>$child->attr_title,
+                            'target'=>$child->target,
+                            'rel'=>$child->rel,
+                        ],
 					];
 				}
 			}

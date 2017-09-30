@@ -6,13 +6,12 @@ use yii\web\Response;
 use yii\web\NotFoundHttpException;
 
 use kriptograf\menu\models\Menu;
-use kriptograf\menu\models\MenuItem;
 use kriptograf\menu\models\Search;
 
 class CreatorController extends \yii\web\Controller
 {
 	/**
-	 * List all menu
+	 * Main page managment menus
 	 * @return string
 	 */
 	public function actionIndex()

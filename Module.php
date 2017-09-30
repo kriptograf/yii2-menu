@@ -1,11 +1,11 @@
 <?php
+/**
+ * Module for storing menu items in the database
+ */
 namespace kriptograf\menu;
 
 
 use Yii;
-use yii\helpers\Html;
-use yii\helpers\Json;
-use pceuropa\menu\models\Model;
 
 class Module extends \yii\base\Module {
     

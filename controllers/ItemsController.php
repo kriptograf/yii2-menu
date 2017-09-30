@@ -10,10 +10,11 @@ use kriptograf\menu\models\MenuItem;
 
 class ItemsController extends \yii\web\Controller
 {
-	/**
-	 * @todo передавать id меню
-	 * @return string
-	 */
+    /**
+     * List items from menu
+     * @param $id integer - identifier menu
+     * @return mixed
+     */
 	public function actionIndex($id)
 	{
 		$query = MenuItem::find()->where(['menu_id'=>$id]);
@@ -28,7 +29,8 @@ class ItemsController extends \yii\web\Controller
 	}
 
 	/**
-	 * @todo передавать id меню
+	 * Create menu item
+     * Redurect to list items
 	 * @return string|Response
 	 */
 	public function actionCreate($id)
@@ -73,6 +75,7 @@ class ItemsController extends \yii\web\Controller
 	}
 
 	/**
+     * Edit item menu
 	 * @param $id
 	 * @return array|string
 	 * @throws NotFoundHttpException

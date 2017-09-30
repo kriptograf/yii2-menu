@@ -18,10 +18,16 @@ use kriptograf\menu\models\MenuItem;
  */
 class Menu extends \yii\db\ActiveRecord
 {
+    /**
+     * Types menu uses bootstrap classes
+     */
 	const TYPE_TABS = 'nav-tabs';
 	const TYPE_PILLS = 'nav-pills';
 	const TYPE_STACKED = 'nav-stacked';
 	const TYPE_JUSTIFIED = 'nav-justified';
+
+	const STATUS_ENABLED = 1;
+	const STATUS_DISABLED = 0;
 
 	public static function tableName() 
 	{ 
