@@ -21,7 +21,7 @@ echo  GridView::widget([
                 return GridView::ROW_COLLAPSED;
             },
             'detail'=>function ($model, $key, $index, $column) {
-                return Yii::$app->controller->renderPartial('_menu_items', ['model'=>$model]);
+                return Yii::$app->controller->renderPartial('_menu_items', ['model'=>$model, 'id'=>$model->id]);
             },
             'headerOptions'=>['class'=>'kartik-sheet-style'],
 			'expandOneOnly'=>true
