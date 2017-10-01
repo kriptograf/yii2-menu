@@ -19,7 +19,12 @@ use kartik\grid\GridView;
             'class'=>'kartik\grid\ExpandRowColumn',
             'width'=>'50px',
             'value'=>function ($model, $key, $index, $column) {
-                return GridView::ROW_COLLAPSED;
+                if($model->childs){
+                    return GridView::ROW_COLLAPSED;
+                }
+                else{
+                    return '';
+                }
             },
             'detail'=>function ($model, $key, $index, $column) {
                 return Yii::$app->controller->renderPartial('_menu_items', ['model'=>$model, 'id'=>$model->id]);
