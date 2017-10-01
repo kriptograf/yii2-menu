@@ -6,6 +6,7 @@
  * Time: 21:39
  */
 use kartik\grid\GridView;
+$this->title = Yii::t('app', 'Menu Items');
 ?>
 
 <p>
