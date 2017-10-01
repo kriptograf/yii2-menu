@@ -86,8 +86,6 @@ class ItemsController extends \yii\web\Controller
 		
 		if ($model->load(Yii::$app->request->post()))
 		{
-			$model->menu_id = $id;
-
 			if($model->save())
 			{
 				return $this->redirect(['index', 'id' => $model->menu_id]);
