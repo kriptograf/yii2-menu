@@ -14,24 +14,18 @@ echo  GridView::widget([
 	'filterModel' => $searchModel,
 	'columns' => [
 		['class' => 'yii\grid\SerialColumn'],
-        [
-            'class'=>'kartik\grid\ExpandRowColumn',
-            'width'=>'50px',
-            'value'=>function ($model, $key, $index, $column) {
-                return GridView::ROW_COLLAPSED;
-            },
-            'detail'=>function ($model, $key, $index, $column) {
-                return Yii::$app->controller->renderPartial('_menu_items', ['model'=>$model, 'id'=>$model->id]);
-            },
-            'headerOptions'=>['class'=>'kartik-sheet-style'],
-			'expandOneOnly'=>true
-		],
 		'name',
 		'code',
 		'description',
 		'type',
 		[
 			'class' => 'yii\grid\ActionColumn',
+			'template' => '{items}{update}{delete}',
+			'buttons' => [
+				'items'=>function($url, $model, $key){
+					return Html::a('<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>', Url::toRoute(['/menu/items/index', 'id'=>$model->id]), ['title'=>Yii::t('app', 'Items')]);
+				}
+			]
 		],
 	],
     'pjax'=>true,

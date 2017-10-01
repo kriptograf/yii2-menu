@@ -5,7 +5,7 @@
  * Date: 07.02.17
  * Time: 21:39
  */
-use yii\grid\GridView;
+use kartik\grid\GridView;
 ?>
 
 <p>
@@ -15,7 +15,18 @@ use yii\grid\GridView;
     'dataProvider' => $dataProvider,
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
-        'id',
+        [
+            'class'=>'kartik\grid\ExpandRowColumn',
+            'width'=>'50px',
+            'value'=>function ($model, $key, $index, $column) {
+                return GridView::ROW_COLLAPSED;
+            },
+            'detail'=>function ($model, $key, $index, $column) {
+                return Yii::$app->controller->renderPartial('_menu_items', ['model'=>$model, 'id'=>$model->id]);
+            },
+            'headerOptions'=>['class'=>'kartik-sheet-style'],
+            'expandOneOnly'=>true
+        ],
         'menu_id',
         'parent_id',
         'title',
