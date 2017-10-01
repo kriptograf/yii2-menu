@@ -9,7 +9,7 @@ use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
 
 $dataProvider = new ActiveDataProvider([
-    'query'=>$model->getMenuItems(),
+    'query'=>$model->getChilds(),
 ]);
 ?>
 
