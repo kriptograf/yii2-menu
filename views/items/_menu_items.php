@@ -24,7 +24,6 @@ $dataProvider = new ActiveDataProvider([
                 return $model->menu->name;
             }
         ],
-        'parent_id',
         [
             'attribute'=>'parent_id',
             'value'=>function($model){
