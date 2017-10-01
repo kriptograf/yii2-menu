@@ -32,8 +32,12 @@ use kartik\grid\GridView;
             'headerOptions'=>['class'=>'kartik-sheet-style'],
             'expandOneOnly'=>true
         ],
-        'menu_id',
-        'parent_id',
+        [
+            'attribute'=>'menu_id',
+            'value'=>function($model){
+                return $model->menu->name;
+            }
+        ],
         'title',
         /*[
             'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default

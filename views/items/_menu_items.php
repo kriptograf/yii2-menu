@@ -13,16 +13,24 @@ $dataProvider = new ActiveDataProvider([
 ]);
 ?>
 
-    <p>
-        <a class="btn btn-success" href="<?php echo \yii\helpers\Url::toRoute(['/menu/items/create', 'id'=>$id]);?>"><?php echo Yii::t('app','Create');?></a>
-    </p>
 <?php echo GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
         'id',
-        'menu_id',
+        [
+            'attribute'=>'menu_id',
+            'value'=>function($model){
+                return $model->menu->name;
+            }
+        ],
         'parent_id',
+        [
+            'attribute'=>'parent_id',
+            'value'=>function($model){
+                return $model->parent->title;
+            }
+        ],
         'title',
         /*[
             'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default

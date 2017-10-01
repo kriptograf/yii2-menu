@@ -17,7 +17,7 @@ class ItemsController extends \yii\web\Controller
      */
 	public function actionIndex($id)
 	{
-		$query = MenuItem::find()->where(['menu_id'=>$id]);
+		$query = MenuItem::find()->where(['menu_id'=>$id, 'parent_id'=>0]);
 		$dataProvider = new ActiveDataProvider([
 			'query'=>$query
 		]);
