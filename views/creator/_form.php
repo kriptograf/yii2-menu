@@ -18,8 +18,6 @@ use yii\widgets\ActiveForm;
 
 	<?= $form->field($model, 'description')->textarea(); ?>
 
-	<?= $form->field($model, 'encode')->checkbox();?>
-
 	<?= $form->field($model, 'status')->checkbox();?>
 
 	<div class="form-group">

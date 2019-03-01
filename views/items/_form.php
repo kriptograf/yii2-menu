@@ -31,6 +31,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sort')->textInput(['maxlength' => true]); ?>
 
+    <?= $form->field($model, 'encode')->checkbox();?>
+
     <?= $form->field($model, 'status')->checkbox(); ?>
 
     <div class="form-group">
