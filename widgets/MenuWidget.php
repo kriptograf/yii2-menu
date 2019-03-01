@@ -21,6 +21,16 @@ class MenuWidget extends Widget
      */
     public $cssClass = '';
 
+    /**
+     * Html options for LI tags
+     */
+    public $liOptions = [];
+
+    /**
+     * Html options for LI tags from sub items
+     */
+    public $liChildsOptions = [];
+
 	public function init()
     {
         parent::init();
@@ -47,7 +57,7 @@ class MenuWidget extends Widget
         /**
          * Get menu items
          */
-        $data = MenuItem::getItems($menu->id);
+        $data = MenuItem::getItems($menu->id, $this->liOptions, $this->liChildsOptions);
 
 		return $this->render('index', [
             'data'=>$data,
