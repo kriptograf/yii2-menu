@@ -14,7 +14,12 @@ class MenuWidget extends Widget
      * System name menu for current widget
      * @var string
      */
-	public $code;
+    public $code;
+    
+    /**
+     * CSS class for tag ul
+     */
+    public $cssClass = '';
 
 	public function init()
     {
@@ -47,6 +52,7 @@ class MenuWidget extends Widget
 		return $this->render('index', [
             'data'=>$data,
             'type'=>$menu->type,
+            'cssClass'=>$this->cssClass
         ]);
     }
 }

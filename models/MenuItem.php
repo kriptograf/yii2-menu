@@ -2,7 +2,6 @@
 /**
  * @todo Добавить выпадающие списки значений для атрибутов ссылки
  * @todo Сделать возможность добавления дата атрибутов
- * @todo Добавить атрибут encode, dropDownOptions
  */
 namespace kriptograf\menu\models;
 
@@ -25,6 +24,7 @@ use yii\helpers\ArrayHelper;
  * @property string $rel
  * @property integer $sort
  * @property integer $status
+ * @property integer $encode
  *
  * @property Menu $menu
  */
@@ -54,7 +54,7 @@ class MenuItem extends \yii\db\ActiveRecord
 			[['menu_id', 'title', 'url'], 'required'],
 			[['status', 'parent_id', 'menu_id'], 'integer'],
             [['title','url','class', 'attr_title', 'target', 'rel'], 'string'],
-			[['parent_id'], 'default', 'value'=>0],
+			[['parent_id', 'encode'], 'default', 'value'=>0],
 			['sort', 'safe'],
 		];
 	}
@@ -77,6 +77,7 @@ class MenuItem extends \yii\db\ActiveRecord
 			'rel'         => Yii::t('app', 'Rel attribute'),
 			'sort'        => Yii::t('app', 'Sort'),
 			'status'      => Yii::t('app', 'Published'),
+			'encode'      => Yii::t('app', 'Encode ldbel'),
 		];
 	}
 
@@ -121,9 +122,11 @@ class MenuItem extends \yii\db\ActiveRecord
 	/**
 	 * Return array items to Menu widget
 	 * @param $menu_id
+	 * @param $options array, optional, the HTML attributes of the item container (LI).
+	 * @param $childOptions array, optional, the HTML attributes of the item subcontainer (LI).
 	 * @return array
 	 */
-	public static function getItems($menu_id)
+	public static function getItems($menu_id, $options = [], $childOptions = [])
 	{
 		$out = [];
 		$items = self::find()->where(['menu_id'=>$menu_id, 'status'=>self::STATUS_ACTIVE])->orderBy('sort')->all();
@@ -131,24 +134,29 @@ class MenuItem extends \yii\db\ActiveRecord
 		{
 			$out[$key]['label'] = $item->title;
 			$out[$key]['url'] = $item->url;
+			$out[$key]['options'] = $options;
 			$out[$key]['linkOptions'] = [
 			    'class'=>$item->class,
                 'title'=>$item->attr_title,
                 'target'=>$item->target,
                 'rel'=>$item->rel,
-            ];
+			];
+			$out[$key]['encode'] = $item->encode;
+
 			if($item->childs)
 			{
 				foreach ($item->childs as $k => $child) {
 					$out[$key]['items'][$k] = [
 						'label'=>$child->title,
 						'url'=>$child->url,
+						'options'=>$childOptions,
                         'linkOptions' => [
                             'class'=>$child->class,
                             'title'=>$child->attr_title,
                             'target'=>$child->target,
                             'rel'=>$child->rel,
-                        ],
+						],
+						'encode' => $child->encode,
 					];
 				}
 			}
