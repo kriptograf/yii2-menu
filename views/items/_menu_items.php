@@ -1,34 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: debian
- * Date: 07.02.17
- * Time: 21:39
- */
-use yii\grid\GridView;
+
 use yii\data\ActiveDataProvider;
+use yii\grid\GridView;
 
 $dataProvider = new ActiveDataProvider([
-    'query'=>$model->getChilds(),
+    'query' => $model->getChilds(),
 ]);
 ?>
 
 <?php echo GridView::widget([
     'dataProvider' => $dataProvider,
-    'columns' => [
+    'columns'      => [
         ['class' => 'yii\grid\SerialColumn'],
         'id',
         [
-            'attribute'=>'menu_id',
-            'value'=>function($model){
+            'attribute' => 'menu_id',
+            'value'     => function ($model) {
                 return $model->menu->name;
-            }
+            },
         ],
         [
-            'attribute'=>'parent_id',
-            'value'=>function($model){
+            'attribute' => 'parent_id',
+            'value'     => function ($model) {
                 return $model->parent->title;
-            }
+            },
         ],
         'title',
         /*[
@@ -42,4 +37,4 @@ $dataProvider = new ActiveDataProvider([
             // you may configure additional properties here
         ],
     ],
-]);?>
+]); ?>

@@ -1,17 +1,33 @@
-<?php 
+<?php
 
 namespace kriptograf\menu;
 
 use yii\web\AssetBundle;
 
-class MenuAsset extends AssetBundle{
+/**
+ * Class MenuAsset
+ *
+ *
+ * @package kriptograf\menu
+ *
+ * @author Виталий Москвин <foreach@mail.ru>
+ */
+class MenuAsset extends AssetBundle
+{
+    /** @var string  */
     public $sourcePath = '@vendor/kriptograf/yii2-menu/assets';
-    public $baseUrl = '@web';
-    public $js = [
+
+    /** @var string  */
+    public $baseUrl    = '@web';
+
+    /** @var string[]  */
+    public $js         = [
         'js/Sortable.min.js',
         'js/menu.js',
     ];
-    public $depends = [
+
+    /** @var string[]  */
+    public $depends    = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];

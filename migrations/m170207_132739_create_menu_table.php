@@ -13,12 +13,12 @@ class m170207_132739_create_menu_table extends Migration
     public function up()
     {
         $this->createTable('menu', [
-            'id' => $this->primaryKey(),
-            'name'=>$this->string(255)->notNull(),
-            'code'=>$this->string(255)->notNull(),
-            'type'=>$this->string(255),
-            'description'=>$this->text(),
-            'status'=>$this->integer(1)->defaultValue(1)->notNull()
+            'id'          => $this->primaryKey(),
+            'name'        => $this->string(255)->notNull(),
+            'code'        => $this->string(255)->notNull(),
+            'type'        => $this->string(255),
+            'description' => $this->text(),
+            'status'      => $this->integer(1)->defaultValue(1)->notNull(),
         ]);
     }
 

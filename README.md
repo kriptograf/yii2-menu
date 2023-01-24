@@ -22,15 +22,17 @@ or add
 to the require section of your `composer.json` file.
 
 Add the following code to config file Yii2
+
 ```php
 'modules' => [
-	    'menu' => [
-            'class' => '\kriptograf\menu\Module',
-        ],
+    'menu' => [
+        'class' => '\kriptograf\menu\Module',
+    ],
 ]
 ```
 
 Add the following code to config file Yii2 for settings module kartik-v gridview
+
 ```php
     'modules' => [
        'gridview' =>  [
@@ -60,7 +62,11 @@ $ php yii migrate/up --migrationPath=@vendor/kriptograf/yii2-menu/migrations
 ```
 
 ### 2. Getting started for admin
+
+```php
 /menu/creator
+```
+
 
 Usage
 -----

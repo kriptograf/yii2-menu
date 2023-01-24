@@ -3,7 +3,7 @@
     "description": "Menu module for you site",
     "type": "yii2-extension",
     "keywords": ["yii2","extension","menu"],
-    "version": "0.0.3",
+    "version": "0.0.4",
     "license": "MIT",
     "authors": [
         {

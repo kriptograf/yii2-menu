@@ -1,19 +1,23 @@
 <?php
 
+use pceuropa\menu\Menu;
+use yii\bootstrap\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use pceuropa\menu\Menu;
 use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'View items');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Menu'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('app', 'Menu'),
+    'url'   => ['index'],
+];
 $this->params['breadcrumbs'][] = $this->title;
 
-echo \yii\bootstrap\Html::tag('h1', $model->menu_name);
+echo Html::tag('h1', $model->menu_name);
 
-echo  GridView::widget([
+echo GridView::widget([
     'dataProvider' => $dataProvider,
-    'columns' => [
+    'columns'      => [
         ['class' => 'yii\grid\SerialColumn'],
         'name',
         'code',
@@ -28,7 +32,3 @@ echo Nav::widget([ 'options' => ['class' => 'navbar-nav navbar-left'],
 echo Nav::widget([ 'options' => ['class' => 'navbar-nav navbar-right'],
 					'items' => Menu::NavbarRight($model->menu_id)]);		
 NavBar::end();*/
-
-?>
-
-

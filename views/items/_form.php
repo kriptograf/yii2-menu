@@ -1,20 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: debian
- * Date: 07.02.17
- * Time: 21:52
- */
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
 ?>
 
 <div class="menu-item-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    
+
     <?= $form->field($model, 'parent_id')->dropDownList($model->getParentItems($id), [
-        'prompt'=>'Select parent item'
+        'prompt' => 'Select parent item',
     ]) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
@@ -31,12 +27,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sort')->textInput(['maxlength' => true]); ?>
 
-    <?= $form->field($model, 'encode')->checkbox();?>
+    <?= $form->field($model, 'encode')->checkbox(); ?>
 
     <?= $form->field($model, 'status')->checkbox(); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
